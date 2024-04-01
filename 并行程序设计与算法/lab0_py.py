@@ -7,8 +7,8 @@ n = 1000
 # 对结果计时
 import time
 # 用列表生成m x n的矩阵A,每个元素为[512,2048]之间的随机数
-A = [[random.randint(512, 2048) for j in range(n)] for i in range(m)]
-B = [[random.randint(512, 2048) for j in range(k)] for i in range(n)]
+A = [[random.uniform(512, 2048) for j in range(n)] for i in range(m)]
+B = [[random.uniform(512, 2048) for j in range(k)] for i in range(n)]
 
 start_time = time.time()
 # 对A和B进行乘法运算
