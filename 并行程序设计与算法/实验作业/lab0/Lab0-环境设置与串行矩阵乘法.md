@@ -2,9 +2,9 @@
 
 ### 环境设置
 
-在之前许多课程（操作系统、计算机网络）中已经安装了虚拟机，虚拟机软件为Virtualbox，虚拟机版本为Ubuntu18.04，如下：
+本次实验选择在自己的主机上安装WSL2来进行实验，如下图所示，已经安装好WSL2，能在windows11主机上运行Ubuntu 22.04子系统：
 
-<img src="C:\Users\10174\AppData\Roaming\Typora\typora-user-images\image-20240319223528095.png" alt="image-20240319223528095" style="zoom:67%;" />
+
 
 按照实验文档执行如下代码分别按照OpenMPI和MKL：
 
@@ -59,7 +59,7 @@ print("time: ", use_time, "s")
 
 运行文件，结果如下：
 
-![image-20240319224813541](C:\Users\10174\AppData\Roaming\Typora\typora-user-images\image-20240319224813541.png)
+
 
 
 
@@ -99,18 +99,6 @@ print("time: ", use_time, "s")
     end = clock();
 ```
 
-使用如下命令行编译：
-
-```shell
-g++ -O0 lab0.cpp -o lab0_1
-```
-
-为了确定代码在不进行编译优化的情况下的运行情况，这里编译优化级别设置成0，编译优化标志不开启（经测试，-ffast-math开启与否无显著区别；-funroll-loops开启后运行速度甚至会变慢；-fomit-frame-pointer由于代码未用到函数，所以开启也没有意义）
-
-运行结果如下：
-
-![image-20240319230203939](C:\Users\10174\AppData\Roaming\Typora\typora-user-images\image-20240319230203939.png)
-
 
 
 ### 调整循环顺序
@@ -125,16 +113,51 @@ for (j = 0; j < n; j++)
                C[i * n + j] += A[i * k + p] * B[j + p * n];
 ```
 
-编译代码：
 
-```shell
-g++ -O0 lab0.cpp -o lab0_2
+
+### 循环展开
+
+进行展开数为x的循环展开，具体思路是对最后一层循环遍历的维度进行展开（这里为k），由于k不一定是x的倍数，所以先对`k-k%x`，先对能整除的部分进行循环展开，最后再对余数单独进行一次for循环读取，代码如下：
+
+```C++
+    // 计时开始
+    start = clock();
+    int x = 4;
+    // 矩阵乘法
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            for (int p = 0; p < (k - k % x); p += 4) {
+                C[i * n + j] += A[i * k + p] * B[j + p * n];
+                C[i * n + j] += A[i * k + (p + 1)] * B[j + (p + 1) * n];
+                C[i * n + j] += A[i * k + (p + 2)] * B[j + (p + 2) * n];
+                C[i * n + j] += A[i * k + (p + 3)] * B[j + (p + 3) * n];
+            }
+            // 处理剩余的元素
+            for (int p = k - k % x; p < k; p++) {
+                C[i * n + j] += A[i * k + p] * B[j + p * n];
+            }
+        }
+    }
 ```
 
-运行结果如下：
-
-![image-20240319230451238](C:\Users\10174\AppData\Roaming\Typora\typora-user-images\image-20240319230451238.png)
+经过多次试验后发现x=4的情况下进行循环展开提升的速度最多，这里选择x=4.
 
 
 
-### 
+使用如下命令行进行无优化编译：
+
+```shell
+g++ -O0 lab0.cpp -o lab0
+```
+
+为了确定代码在不进行编译优化的情况下的运行情况，这里编译优化级别设置成0，编译优化标志不开启（经测试，-ffast-math开启与否无显著区别；-funroll-loops开启后运行速度甚至会变慢；-fomit-frame-pointer由于代码未用到函数，所以开启也没有意义）
+
+运行得到如下结果：
+
+![image-20240401200511902](/Users/liuguanlin/Github/Communication-theory/并行程序设计与算法/实验作业/lab0/assets/image-20240401200511902.png)
+
+多次取平均后原始矩阵乘法大概在3.2s左右，调整循环顺序后大概在3.05左右，而循环展开后的乘法时间大概在2.85s。
+
+
+
+### 编译优化

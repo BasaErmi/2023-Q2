@@ -64,27 +64,28 @@ int main() {
     end = clock();
     printf(" 调整循环顺序后的矩阵乘法时间 %f seconds\n", (double) (end - start) / CLOCKS_PER_SEC);
 
-    //循环展开（k=4）
+    //循环展开（x=4）
     // 计时开始
     start = clock();
+    int x = 4;
     // 矩阵乘法
     for (i = 0; i < m; i++) {
         for (j = 0; j < n; j++) {
-            for (int p = 0; p < (k - k % 4); p += 4) {
+            for (int p = 0; p < (k - k % x); p += 4) {
                 C[i * n + j] += A[i * k + p] * B[j + p * n];
                 C[i * n + j] += A[i * k + (p + 1)] * B[j + (p + 1) * n];
                 C[i * n + j] += A[i * k + (p + 2)] * B[j + (p + 2) * n];
                 C[i * n + j] += A[i * k + (p + 3)] * B[j + (p + 3) * n];
             }
             // 处理剩余的元素
-            for (int p = k - k % 4; p < k; p++) {
+            for (int p = k - k % x; p < k; p++) {
                 C[i * n + j] += A[i * k + p] * B[j + p * n];
             }
         }
     }
     // 计时结束
     end = clock();
-    printf(" 循环展开（k=4）后的矩阵乘法时间 %f seconds\n", (double) (end - start) / CLOCKS_PER_SEC);
+    printf(" 循环展开（x=4）后的矩阵乘法时间 %f seconds\n", (double) (end - start) / CLOCKS_PER_SEC);
 
 
 }
