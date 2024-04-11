@@ -2,13 +2,15 @@ import random
 
 m = 2000
 k = 200
-n = 1000
+n = 2000
 
 # 对结果计时
 import time
 # 用列表生成m x n的矩阵A,每个元素为[512,2048]之间的随机数
 A = [[random.uniform(512, 2048) for j in range(n)] for i in range(m)]
 B = [[random.uniform(512, 2048) for j in range(k)] for i in range(n)]
+
+print(f"矩阵维度：A({m},{n}), B({n},{k})")
 
 start_time = time.time()
 # 对A和B进行乘法运算

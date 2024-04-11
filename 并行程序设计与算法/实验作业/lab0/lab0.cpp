@@ -51,6 +51,18 @@ int main() {
     end = clock();
     printf(" 原始矩阵乘法时间 %f seconds\n", (double) (end - start) / CLOCKS_PER_SEC);
     
+    //初始化A、B、C矩阵中的数值，每个值在[512,2048]之间的随机数
+    for (i = 0; i < m; i++)
+        for (j = 0; j < k; j++)
+            A[i * k + j] = (double) (dis(gen));
+    for (i = 0; i < k; i++)
+        for (j = 0; j < n; j++)
+            B[i * n + j] = (double) (dis(gen));
+    for (i = 0; i < m; i++)
+        for (j = 0; j < n; j++)
+            C[i * n + j] = 0.0;
+
+
     //调整循环顺序
     // 计时开始
     start = clock();
@@ -60,9 +72,22 @@ int main() {
             for (int p = 0; p < k; p++)
                 C[i * n + j] += A[i * k + p] * B[j + p * n];
 
+                
     // 计时结束
     end = clock();
     printf(" 调整循环顺序后的矩阵乘法时间 %f seconds\n", (double) (end - start) / CLOCKS_PER_SEC);
+
+    //初始化A、B、C矩阵中的数值，每个值在[512,2048]之间的随机数
+    for (i = 0; i < m; i++)
+        for (j = 0; j < k; j++)
+            A[i * k + j] = (double) (dis(gen));
+    for (i = 0; i < k; i++)
+        for (j = 0; j < n; j++)
+            B[i * n + j] = (double) (dis(gen));
+    for (i = 0; i < m; i++)
+        for (j = 0; j < n; j++)
+            C[i * n + j] = 0.0;
+
 
     //循环展开（x=4）
     // 计时开始
