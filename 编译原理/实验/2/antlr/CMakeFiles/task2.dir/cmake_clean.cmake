@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "../../../antlr4_generated_src/task2-antlr/SYsU_lang.interp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_lang.tokens"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langBaseListener.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langBaseListener.h"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langBaseVisitor.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langBaseVisitor.h"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langLexer.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langLexer.h"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langListener.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langListener.h"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langParser.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langParser.h"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langVisitor.cpp"
+  "../../../antlr4_generated_src/task2-antlr/SYsU_langVisitor.h"
+  "CMakeFiles/task2.dir/Ast2Asg.cpp.o"
+  "CMakeFiles/task2.dir/Ast2Asg.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langBaseListener.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langBaseListener.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langBaseVisitor.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langBaseVisitor.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langLexer.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langLexer.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langListener.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langListener.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langParser.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langParser.cpp.o.d"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langVisitor.cpp.o"
+  "CMakeFiles/task2.dir/__/__/__/antlr4_generated_src/task2-antlr/SYsU_langVisitor.cpp.o.d"
+  "CMakeFiles/task2.dir/__/common/Asg2Json.cpp.o"
+  "CMakeFiles/task2.dir/__/common/Asg2Json.cpp.o.d"
+  "CMakeFiles/task2.dir/__/common/Typing.cpp.o"
+  "CMakeFiles/task2.dir/__/common/Typing.cpp.o.d"
+  "CMakeFiles/task2.dir/main.cpp.o"
+  "CMakeFiles/task2.dir/main.cpp.o.d"
+  "task2"
+  "task2.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/task2.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
