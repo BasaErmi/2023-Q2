@@ -39,7 +39,7 @@ def harris_corners(image, block_size, ksize, k, threshold):
 
 
 # 读取图像
-image = cv2.imread('img/sudoku.png')
+image = cv2.imread('images/sudoku.png')
 
 # 应用Harris角点检测
 result_image = harris_corners(image, block_size=3, ksize=3, k=0.04, threshold=0.01)
