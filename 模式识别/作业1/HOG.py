@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-# Harris角点检测
 def harris_corners(image, block_size, ksize, k, threshold):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray = np.float32(gray)
@@ -25,43 +24,50 @@ def harris_corners(image, block_size, ksize, k, threshold):
                 keypoints.append(cv2.KeyPoint(j, i, 1))
     return keypoints
 
+
 # 读取图像
-image1 = cv2.imread('images/uttower1.jpg')
+image1 = cv2.imread('images/uttower1.jpg') # image1.shape = (410, 615, 3)
 image2 = cv2.imread('images/uttower2.jpg')
 
 # 提取关键点
 keypoints1 = harris_corners(image1, block_size=3, ksize=3, k=0.04, threshold=0.01)
 keypoints2 = harris_corners(image2, block_size=3, ksize=3, k=0.04, threshold=0.01)
 
-# 绘制关键点并保存结果
-image1_with_keypoints = cv2.drawKeypoints(image1, keypoints1, None, color=(0, 255, 0), flags=cv2.DrawMatchesFlags_DRAW_RICH_KEYPOINTS)
-image2_with_keypoints = cv2.drawKeypoints(image2, keypoints2, None, color=(0, 255, 0), flags=cv2.DrawMatchesFlags_DRAW_RICH_KEYPOINTS)
+print(f"Number of keypoints in image 1: {len(keypoints1)}")
+print(f"Number of keypoints in image 2: {len(keypoints2)}")
+# for i in range(8500, 8510):
+#     print(keypoints1[i].pt)
 
-cv2.imwrite('results/uttower1_keypoints.jpg', image1_with_keypoints)
-cv2.imwrite('results/uttower2_keypoints.jpg', image2_with_keypoints)
+# 将坐标变为整数
+locations1 = [(int(k.pt[0]), int(k.pt[1])) for k in keypoints1]
+locations2 = [(int(k.pt[0]), int(k.pt[1])) for k in keypoints2]
 
-# 使用SIFT特征描述子获取关键点的特征
-sift = cv2.SIFT_create()
-keypoints1, descriptors1 = sift.detectAndCompute(image1, None)
-keypoints2, descriptors2 = sift.detectAndCompute(image2, None)
+# for i in range(10):
+#     print(locations1[i])
+#     print(type(locations1[i]))
 
-print(descriptors1.shape)
-print(descriptors2.shape)
+# 对每个关键点周围的区域计算HOG描述子
+hog = cv2.HOGDescriptor()
+descriptors1 = hog.compute(image1, locations=locations1[:10])
+descriptors2 = hog.compute(image2, locations=locations2[:10])
+ b
+print(f"shape of descriptors1: {descriptors1.shape}")
+print(f"shape of descriptors2: {descriptors2.shape}")
+
 
 # 创建BFMatcher对象并显式指定距离度量方式为欧几里得距离
 bf = cv2.BFMatcher(normType=cv2.NORM_L2)
 
-# 使用欧几里得距离进行匹配
-matches = bf.knnMatch(descriptors1, descriptors2, k=2)
+# 使用欧几里得距离进行暴力匹配
+matches = bf.match(descriptors1, descriptors2)
 
-# 应用比值测试
-good_matches = []
-for m, n in matches:
-    if m.distance < 0.60 * n.distance:
-        good_matches.append(m)
+# 按照距离进行排序
+matches = sorted(matches, key=lambda x: x.distance)
 
-# Draw matches
-image_matches = cv2.drawMatches(image1, keypoints1, image2, keypoints2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+# 绘制匹配结果
+result = cv2.drawMatches(image1, keypoints1, image2, keypoints2, matches, None)
 
-# 保存匹配结果
-cv2.imwrite('results/uttower_match_sift.png', image_matches)
+# 显示结果
+cv2.imshow('Result', result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
