@@ -83,7 +83,7 @@ def optim_mask(mask, warp_point):
     return mask
 
 
-def Seam_Left_Right(left, imagewarp, H, warp_point, with_optim_mask=False):
+def Seam_Left_Right(left, imagewarp, H, warp_point, with_optim_mask=True):
     '''
     :param left: 拼接的左图像
     :param imagewarp: 透视变化后的右图像

@@ -6,14 +6,17 @@ from utils import harris_corners, warp_corner, optim_mask, Seam_Left_Right
 image1 = cv2.imread('images/uttower1.jpg') # image1.shape = (410, 615, 3)
 image2 = cv2.imread('images/uttower2.jpg')
 
-# 提取关键点
-keypoints1 = harris_corners(image1, block_size=3, ksize=3, k=0.04, threshold=0.01)
-keypoints2 = harris_corners(image2, block_size=3, ksize=3, k=0.04, threshold=0.01)
+# 使用Harris角点检测算法提取关键点
+# keypoints1 = harris_corners(image1, block_size=3, ksize=3, k=0.04, threshold=0.01)
+# keypoints2 = harris_corners(image2, block_size=3, ksize=3, k=0.04, threshold=0.01)
 
-print(f"Number of keypoints in image 1: {len(keypoints1)}")
-print(f"Number of keypoints in image 2: {len(keypoints2)}")
-# for i in range(8500, 8510):
-#     print(keypoints1[i].pt)
+# 使用SIFT提取关键点
+sift = cv2.SIFT_create()
+keypoints1, _ = sift.detectAndCompute(image1, None)
+keypoints2, _ = sift.detectAndCompute(image2, None)
+
+print(f"len of keypoints1: {len(keypoints1)}")
+print(f"len of keypoints2: {len(keypoints2)}")
 
 # 将坐标变为整数
 locations1 = [(int(k.pt[0]), int(k.pt[1])) for k in keypoints1]
@@ -28,9 +31,10 @@ hog = cv2.HOGDescriptor()
 descriptors1 = hog.compute(image1, locations=locations1)
 descriptors2 = hog.compute(image2, locations=locations2)
 
-descriptors1 = descriptors1.reshape(-1, 3780)
-descriptors2 = descriptors2.reshape(-1, 3780)
+print(f"shape of descriptors1: {descriptors1.shape}")
 
+descriptors1 = descriptors1.reshape(len(keypoints1), -1)
+descriptors2 = descriptors2.reshape(len(keypoints2), -1)
 print(f"shape of descriptors1: {descriptors1.shape}")
 print(f"shape of descriptors2: {descriptors2.shape}")
 
@@ -44,7 +48,7 @@ matches = bf.knnMatch(descriptors1, descriptors2, k=2)
 # 使用比值测试获取好的匹配
 good_matches = []
 for m, n in matches:
-    if m.distance < 1 * n.distance:
+    if m.distance < 0.94 * n.distance:
         good_matches.append(m)
 
 # 绘制匹配结果
