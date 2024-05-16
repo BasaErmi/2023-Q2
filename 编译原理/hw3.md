@@ -17,7 +17,7 @@ Y -> d
 
 ##### (2)
 
-![9c75a72f8626578ccca2edac2db39c0](C:\Users\HP\Documents\WeChat Files\wxid_3v5lzw9ztup921\FileStorage\Temp\9c75a72f8626578ccca2edac2db39c0.jpg)
+![9c75a72f8626578ccca2edac2db39c0](./assets/9c75a72f8626578ccca2edac2db39c0.jpg)
 
 ##### (3)
 
@@ -79,4 +79,14 @@ E -> id, $/+
 
 由此构建出DFA：
 
-![bbe209e9a256d038de16e8f3aa42abd](C:\Users\HP\Documents\WeChat Files\wxid_3v5lzw9ztup921\FileStorage\Temp\bbe209e9a256d038de16e8f3aa42abd.jpg)
+![bbe209e9a256d038de16e8f3aa42abd](./assets/bbe209e9a256d038de16e8f3aa42abd.jpg)
+
+##### (2)对每⼀个含有冲突的状态，列出状态的编号、引起冲突的输⼊符号、以及冲突 的类型；
+
+| 状态编号 | 输入符号 |   冲突类型    |
+| :------: | :------: | :-----------: |
+|    I2    |    $     | 移进-规约冲突 |
+|    I5    |   $/+    | 移进-规约冲突 |
+|    I7    |   $/+    | 移进-规约冲突 |
+
+##### (3)
