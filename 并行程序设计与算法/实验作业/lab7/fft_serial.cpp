@@ -16,39 +16,8 @@ double ggl ( double *ds );
 void step ( int n, int mj, double a[], double b[], double c[], double d[], 
   double w[], double sgn );
 void timestamp ( );
-
-//****************************************************************************80
-
 int main ( )
 
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    MAIN is the main program for FFT_SERIAL.
-//
-//  Discussion:
-//
-//    The complex data in an N vector is stored as pairs of values in a
-//    real vector of length 2*N.
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
 {
   double ctime;
   double ctime1;
@@ -80,9 +49,6 @@ int main ( )
   cout << "\n";
   cout << "  Demonstrate an implementation of the Fast Fourier Transform\n";
   cout << "  of a complex data vector.\n";
-//
-//  Prepare for tests.
-//
   cout << "\n";
   cout << "  Accuracy check:\n";
   cout << "\n";
@@ -214,50 +180,8 @@ int main ( )
 
   return 0;
 }
-//****************************************************************************80
 
 void ccopy ( int n, double x[], double y[] )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    CCOPY copies a complex vector.
-//
-//  Discussion:
-//
-//    The "complex" vector A[N] is actually stored as a double vector B[2*N].
-//
-//    The "complex" vector entry A[I] is stored as:
-//
-//      B[I*2+0], the real part,
-//      B[I*2+1], the imaginary part.
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
-//  Parameters:
-//
-//    Input, int N, the length of the "complex" array.
-//
-//    Input, double X[2*N], the array to be copied.
-//
-//    Output, double Y[2*N], a copy of X.
-//
 {
   int i;
 
@@ -268,46 +192,8 @@ void ccopy ( int n, double x[], double y[] )
    }
   return;
 }
-//****************************************************************************80
 
 void cfft2 ( int n, double x[], double y[], double w[], double sgn )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    CFFT2 performs a complex Fast Fourier Transform.
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
-//  Parameters:
-//
-//    Input, int N, the size of the array to be transformed.
-//
-//    Input/output, double X[2*N], the data to be transformed.  
-//    On output, the contents of X have been overwritten by work information.
-//
-//    Output, double Y[2*N], the forward or backward FFT of X.
-//
-//    Input, double W[N], a table of sines and cosines.
-//
-//    Input, double SGN, is +1 for a "forward" FFT and -1 for a "backward" FFT.
-//
 {
   int j;
   int m;
@@ -316,9 +202,7 @@ void cfft2 ( int n, double x[], double y[], double w[], double sgn )
 
    m = ( int ) ( log ( ( double ) n ) / log ( 1.99 ) );
    mj   = 1;
-//
-//  Toggling switch for work array.
-//
+
   tgle = 1;
   step ( n, mj, &x[0*2+0], &x[(n/2)*2+0], &y[0*2+0], &y[mj*2+0], w, sgn );
 
@@ -341,9 +225,7 @@ void cfft2 ( int n, double x[], double y[], double w[], double sgn )
       tgle = 1;
     }
   }
-//
-//  Last pass thru data: move y to x if needed 
-//
+
   if ( tgle ) 
   {
     ccopy ( n, y, x );
@@ -354,39 +236,8 @@ void cfft2 ( int n, double x[], double y[], double w[], double sgn )
 
   return;
 }
-//****************************************************************************80
 
 void cffti ( int n, double w[] )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    CFFTI sets up sine and cosine tables needed for the FFT calculation.
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
-//  Parameters:
-//
-//    Input, int N, the size of the array to be transformed.
-//
-//    Output, double W[N], a table of sines and cosines.
-//
 {
   double arg;
   double aw;
@@ -405,28 +256,7 @@ void cffti ( int n, double w[] )
   }
   return;
 }
-//****************************************************************************80
-
 double cpu_time ( void )
-
-//****************************************************************************80
-//
-//  Purpose:
-// 
-//    CPU_TIME reports the elapsed CPU time.
-//
-//  Modified:
-//
-//    27 September 2005
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Output, double CPU_TIME, the current total elapsed CPU time in second.
-//
 {
   double value;
 
@@ -434,39 +264,8 @@ double cpu_time ( void )
 
   return value;
 }
-//****************************************************************************80
 
 double ggl ( double *seed )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    GGL generates uniformly distributed pseudorandom numbers. 
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen, M Troyer, I Vattulainen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
-//  Parameters:
-//
-//    Input/output, double *SEED, used as a seed for the sequence.
-//
-//    Output, double GGL, the next pseudorandom value.
-//
 {
   double d2 = 0.2147483647e10;
   double t;
@@ -479,36 +278,8 @@ double ggl ( double *seed )
 
   return value;
 }
-//****************************************************************************80
-
 void step ( int n, int mj, double a[], double b[], double c[],
   double d[], double w[], double sgn )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    STEP carries out one step of the workspace version of CFFT2.
-//
-//  Modified:
-//
-//    23 March 2009
-//
-//  Author:
-//
-//    Original C version by Wesley Petersen.
-//    C++ version by John Burkardt.
-//
-//  Reference:
-//
-//    Wesley Petersen, Peter Arbenz, 
-//    Introduction to Parallel Computing - A practical guide with examples in C,
-//    Oxford University Press,
-//    ISBN: 0-19-851576-6,
-//    LC: QA76.58.P47.
-//
-//  Parameters:
-//
 {
   double ambr;
   double ambu;
@@ -556,36 +327,7 @@ void step ( int n, int mj, double a[], double b[], double c[],
   }
   return;
 }
-//****************************************************************************80
-
 void timestamp ( )
-
-//****************************************************************************80
-//
-//  Purpose:
-//
-//    TIMESTAMP prints the current YMDHMS date as a time stamp.
-//
-//  Example:
-//
-//    31 May 2001 09:45:54 AM
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license. 
-//
-//  Modified:
-//
-//    24 September 2003
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    None
-//
 {
 # define TIME_SIZE 40
 

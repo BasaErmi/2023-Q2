@@ -1,0 +1,983 @@
+desc: (none)
+cmd: ./fft_serial
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=2277981
+mem_heap_B=72704
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=2386511
+mem_heap_B=72719
+mem_heap_extra_B=17
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=2386618
+mem_heap_B=73191
+mem_heap_extra_B=33
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=2387272
+mem_heap_B=77287
+mem_heap_extra_B=41
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=2388190
+mem_heap_B=78000
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=2391226
+mem_heap_B=78000
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=detailed
+n3: 78000 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n1: 4096 0x4BE8BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 4096 0x4BF7CDF: _IO_doallocbuf (genops.c:347)
+   n1: 4096 0x4BF54C3: _IO_file_xsgetn (fileops.c:1287)
+    n1: 4096 0x4BF41F3: fread_unlocked (iofread_u.c:40)
+     n1: 4096 0x4C4595B: __tzfile_read (tzfile.c:182)
+      n1: 4096 0x4C44C23: tzset_internal (tzset.c:405)
+       n1: 4096 0x4C455A6: __tz_convert (tzset.c:577)
+        n1: 4096 0x10A594: timestamp() (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+         n0: 4096 0x1093C7: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1200 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=7
+#-----------
+time=2391352
+mem_heap_B=73432
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=2391423
+mem_heap_B=73452
+mem_heap_extra_B=52
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=2391577
+mem_heap_B=73472
+mem_heap_extra_B=72
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=2391706
+mem_heap_B=73493
+mem_heap_extra_B=91
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=2391871
+mem_heap_B=73514
+mem_heap_extra_B=110
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=2392139
+mem_heap_B=73534
+mem_heap_extra_B=130
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=2399923
+mem_heap_B=74558
+mem_heap_extra_B=138
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=2407566
+mem_heap_B=74574
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=2407698
+mem_heap_B=74670
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=9139112
+mem_heap_B=74654
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=9139251
+mem_heap_B=74590
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=9139383
+mem_heap_B=74782
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n3: 74782 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 1054 in 9 places, all below massif's threshold (1.00%)
+ n1: 1024 0x4BE8BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 1024 0x4BF7CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4BF6F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4BF56D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4BF56D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4BE9FD6: fwrite (iofwrite.c:39)
+       n1: 1024 0x4993B64: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+        n1: 1024 0x4993EBA: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+         n1: 1024 0x10A5D6: timestamp() (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+          n0: 1024 0x1093C7: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=19
+#-----------
+time=30321380
+mem_heap_B=74750
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=30321519
+mem_heap_B=74622
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=30321651
+mem_heap_B=75006
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=74869867
+mem_heap_B=74942
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=74870006
+mem_heap_B=74686
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=74870138
+mem_heap_B=75454
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=193014261
+mem_heap_B=75326
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=193014400
+mem_heap_B=74814
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=193014532
+mem_heap_B=76350
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=218249956
+mem_heap_B=76094
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=218250095
+mem_heap_B=75070
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=218250227
+mem_heap_B=78142
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=281081241
+mem_heap_B=77630
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=281081307
+mem_heap_B=75582
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=281081380
+mem_heap_B=75582
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=281081512
+mem_heap_B=81726
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n7: 81726 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 2048 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2048 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2048 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1024 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 1024 0x4BE8BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 1024 0x4BF7CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4BF6F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4BF56D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4BF56D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4BE9FD6: fwrite (iofwrite.c:39)
+       n1: 1024 0x4993B64: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+        n1: 1024 0x4993EBA: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+         n1: 1024 0x10A5D6: timestamp() (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+          n0: 1024 0x1093C7: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 830 in 5 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=35
+#-----------
+time=414424969
+mem_heap_B=81726
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n7: 81726 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 2048 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2048 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2048 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1024 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 1024 0x4BE8BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 1024 0x4BF7CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4BF6F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4BF56D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4BF56D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4BE9FD6: fwrite (iofwrite.c:39)
+       n1: 1024 0x4993B64: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+        n1: 1024 0x4993EBA: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+         n1: 1024 0x10A5D6: timestamp() (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+          n0: 1024 0x1093C7: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 830 in 5 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=36
+#-----------
+time=414425035
+mem_heap_B=76606
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=414425108
+mem_heap_B=76606
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=414425240
+mem_heap_B=88894
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=732200684
+mem_heap_B=88894
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n7: 88894 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 4096 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4096 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4096 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2048 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 1024 0x4BE8BA3: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 1024 0x4BF7CDF: _IO_doallocbuf (genops.c:347)
+   n1: 1024 0x4BF6F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+    n1: 1024 0x4BF56D4: _IO_new_file_xsputn (fileops.c:1243)
+     n1: 1024 0x4BF56D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+      n1: 1024 0x4BE9FD6: fwrite (iofwrite.c:39)
+       n1: 1024 0x4993B64: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+        n1: 1024 0x4993EBA: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+         n1: 1024 0x10A5D6: timestamp() (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+          n0: 1024 0x1093C7: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 830 in 5 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=40
+#-----------
+time=732200750
+mem_heap_B=78654
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=732200823
+mem_heap_B=78654
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=732200955
+mem_heap_B=103230
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=800154417
+mem_heap_B=103230
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 103230 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 8192 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8192 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8192 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4096 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=44
+#-----------
+time=800154483
+mem_heap_B=82750
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=800154556
+mem_heap_B=82750
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=800154688
+mem_heap_B=131902
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=956939035
+mem_heap_B=131902
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 131902 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 16384 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 16384 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 16384 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8192 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=48
+#-----------
+time=956939101
+mem_heap_B=90942
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=956939174
+mem_heap_B=90942
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=956939262
+mem_heap_B=156478
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=1284193644
+mem_heap_B=189246
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 189246 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 32768 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 32768 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 32768 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 16384 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=52
+#-----------
+time=1284193710
+mem_heap_B=107326
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=1284193783
+mem_heap_B=107326
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=1284193871
+mem_heap_B=238398
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=2022518407
+mem_heap_B=303934
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 303934 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 65536 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 65536 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 65536 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 32768 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=56
+#-----------
+time=2022518473
+mem_heap_B=140094
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=2022518546
+mem_heap_B=140094
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=2022518634
+mem_heap_B=402238
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=2196932738
+mem_heap_B=533310
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 533310 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 131072 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 131072 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 131072 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 65536 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=60
+#-----------
+time=2196932804
+mem_heap_B=205630
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=2196932877
+mem_heap_B=205630
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=2196932965
+mem_heap_B=729918
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=2582365898
+mem_heap_B=992062
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 992062 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 262144 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 262144 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 262144 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 131072 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=64
+#-----------
+time=2582365964
+mem_heap_B=336702
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=2582366037
+mem_heap_B=336702
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=2582366125
+mem_heap_B=1385278
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=3377123547
+mem_heap_B=1909566
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 1909566 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 524288 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 524288 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 524288 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 262144 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=68
+#-----------
+time=3377123613
+mem_heap_B=598846
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=3377123686
+mem_heap_B=598846
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=3377123774
+mem_heap_B=2695998
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=5113181832
+mem_heap_B=3744574
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n6: 3744574 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1048576 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1048576 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1048576 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 524288 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n1: 72704 0x4901939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n0: 72704 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+ n0: 1854 in 6 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=72
+#-----------
+time=5113181898
+mem_heap_B=1123134
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=5113181971
+mem_heap_B=1123134
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=5113182059
+mem_heap_B=5317438
+mem_heap_extra_B=162
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=5873433057
+mem_heap_B=7414590
+mem_heap_extra_B=170
+mem_stacks_B=0
+heap_tree=detailed
+n5: 7414590 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 2097152 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2097152 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2097152 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 1048576 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 74558 in 7 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=76
+#-----------
+time=5873433123
+mem_heap_B=2171710
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=77
+#-----------
+time=5873433196
+mem_heap_B=2171710
+mem_heap_extra_B=146
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=5873433284
+mem_heap_B=10560318
+mem_heap_extra_B=8226
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=79
+#-----------
+time=7500820670
+mem_heap_B=14754622
+mem_heap_extra_B=12266
+mem_stacks_B=0
+heap_tree=detailed
+n5: 14754622 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 4194304 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4194304 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4194304 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 2097152 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 74558 in 7 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=80
+#-----------
+time=7500820736
+mem_heap_B=4268862
+mem_heap_extra_B=4178
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=81
+#-----------
+time=7500820809
+mem_heap_B=4268862
+mem_heap_extra_B=4178
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=82
+#-----------
+time=7500820897
+mem_heap_B=21046078
+mem_heap_extra_B=12258
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=83
+#-----------
+time=10828510839
+mem_heap_B=29434686
+mem_heap_extra_B=16298
+mem_stacks_B=0
+heap_tree=detailed
+n5: 29434686 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 8388608 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8388608 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8388608 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 4194304 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 74558 in 7 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=84
+#-----------
+time=10828510905
+mem_heap_B=8463166
+mem_heap_extra_B=4178
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=85
+#-----------
+time=10828510978
+mem_heap_B=8463166
+mem_heap_extra_B=4178
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=86
+#-----------
+time=10828511066
+mem_heap_B=42017598
+mem_heap_extra_B=12258
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=87
+#-----------
+time=17900339924
+mem_heap_B=58794814
+mem_heap_extra_B=16298
+mem_stacks_B=0
+heap_tree=peak
+n5: 58794814 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 16777216 0x10958E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 16777216 0x1095BE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 16777216 0x1095EE: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 8388608 0x10955E: main (in /mnt/d/Paper/Communication-theory/并行程序设计与算法/实验作业/lab7/fft_serial)
+ n0: 74558 in 7 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=88
+#-----------
+time=17900339990
+mem_heap_B=16851774
+mem_heap_extra_B=4178
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=89
+#-----------
+time=17900342182
+mem_heap_B=74543
+mem_heap_extra_B=129
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=90
+#-----------
+time=17900358446
+mem_heap_B=1854
+mem_heap_extra_B=130
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=91
+#-----------
+time=17900359550
+mem_heap_B=830
+mem_heap_extra_B=122
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=92
+#-----------
+time=17900359633
+mem_heap_B=810
+mem_heap_extra_B=102
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=93
+#-----------
+time=17900359701
+mem_heap_B=769
+mem_heap_extra_B=63
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=94
+#-----------
+time=17900359769
+mem_heap_B=728
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=95
+#-----------
+time=17900360951
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty

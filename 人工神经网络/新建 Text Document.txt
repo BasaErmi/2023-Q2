@@ -1,0 +1,168 @@
+## 关于期中作业模型架构的补充
+
+|   学号   |  姓名  |
+| :------: | :----: |
+| 20319045 | 刘冠麟 |
+
+> 由于写实验报告的时候有些仓促，文档中模型架构中设计这部分有很多地方没有说清楚（还有一些地方有错误），故此提交关于模型架构的补充说明，同时附上了所使用的代码框架的说明，以便更好地展示和说明所使用模型地架构和设计。
+
+### 模型架构设计
+
+模型实现参考了**ResNeXt**论文《Aggregated Residual Transformations for Deep Neural Networks》(https://arxiv.org/pdf/1611.05431)，在ResNet-18的基础上参考了ResNeXt进行了改进，**将ResNet中的残差块改成了ResNeXt块，并且加入了dropout层**，同时通过多次对比实验（见原文档的附录），针对这次数据集简化并改进了模型的架构设计。
+
+得益于数据预处理、强大的ResNeXt架构以及针对数据集的微调，模型整体表现优异，整体预测准确率为**74.4%**，远高于实验baseline给出49.8%，高出了**24.6%**。
+
+#### ResNeXt Block
+
+本次实验中将ResNet18所使用的残差块改成了ResNeXtBlock，ResNeXtBlock参考原论文的架构设计实现，同时融合了ResNet和Inception架构的特点。
+
+对于每一个ResNeXt Block，首先会通过1x1卷积减少输入特征图的通道数，同时，然后再通过3x3的分组卷积处理特征图像，最后通过1x1卷积恢复特征图的通道数，同时与ResNet一样还会将输入与输出进行残差连接。
+
+与残差块Residual block一样，ResNeXt Block也需要具有改变特征图通道数和分辨率的的能力（一般情况下就是将通道数翻倍、长宽减半），也就是说对于输出通道数改变的情况，残差连接中还需要对输入进行一个1x1卷积改变通道数和图像分辨率，使得输入和输出通道数和图像尺寸相同，从而可以直接相加、拟合残差。
+
+具体来说，ResNeXt Block的设计架构如下：
+
+![image-20240520184403045](./assets/image-20240520184403045.png)
+
+由于ResNeXt是融合了ResNet和Inception架构的实现同时拥有了两个模型的关键特征：
+
+- **分组卷积**：ResNeXt Block通过使用分组卷积将通道分成多个组，每个组单独进行卷积操作。这种方式减少了参数数量和计算量，通过增加Cardinality，可以在不显著增加参数数量的情况下增强模型的性能。
+- **残差连接**：类似ResNet，ResNeXt Block也使用了残差连接，将输入直接添加到输出中，从而缓解梯度消失问题，加速训练，并提高深层网络的性能。
+
+ResNeXt Block的实现代码如下：
+
+```python
+class ResNeXtBlock(nn.Module):
+    """ResNeXt block"""
+    def __init__(self, num_channels, groups, bot_mul, use_1x1conv=False,
+                 strides=1):
+        super().__init__()
+        bot_channels = int(round(num_channels * bot_mul))
+        self.conv1 = nn.LazyConv2d(bot_channels, kernel_size=1, stride=1)
+        self.conv2 = nn.LazyConv2d(bot_channels, kernel_size=3,
+                                   stride=strides, padding=1,
+                                   groups=bot_channels//groups)
+        self.conv3 = nn.LazyConv2d(num_channels, kernel_size=1, stride=1)
+        self.bn1 = nn.LazyBatchNorm2d()
+        self.bn2 = nn.LazyBatchNorm2d()
+        self.bn3 = nn.LazyBatchNorm2d()
+        if use_1x1conv:
+            self.conv4 = nn.LazyConv2d(num_channels, kernel_size=1,
+                                       stride=strides)
+            self.bn4 = nn.LazyBatchNorm2d()
+        else:
+            self.conv4 = None
+
+    def forward(self, X):
+        Y = F.relu(self.bn1(self.conv1(X)))
+        Y = F.relu(self.bn2(self.conv2(Y)))
+        Y = self.bn3(self.conv3(Y))
+        if self.conv4:
+            X = self.bn4(self.conv4(X))
+        return F.relu(Y + X)
+```
+
+其中参数`use_1x1conv`决定是否将输入进行1x1卷积。
+
+
+
+#### ResNeXt Stage
+
+参考ResNet和ResNeXt的网络架构，设计的网络除了输入和输出部分外，中间由多个**ResNeXt Stage**组成，每个ResNeXt Stage包含多个（大于等于2）ResNeXt Block，每个ResNeXt Stage中的第一个ResNeXt Block的残差连接中需要包含1x1的卷积块用以调整图片的通道数，后面的若干个ResNeXt Block则保持通道数不变，只用于提取特征。两种块设计分别对应上图中的两个block。最后整个网络由多个这样的Stage依次堆叠而成，形成一个深层次的卷积神经网络。
+
+每一个ResNeXt Stage的结构示意图如下，这次实验使用的神经网络就是由若干个这样的模块串联而成：
+
+<img src="./assets/image-20240520190200989.png" alt="image-20240520190200989" style="zoom: 67%;" />
+
+在本次实验的模型架构中参考了ResNet18，将每一个Stage的blocks数目设置为**2**，也就是每一个stage只由两个ResNeXt Block所组成。
+
+针对这次的数据集，由于数据集较小，为了防止过拟合，所以在传统的stage之上进行了改进，在最后两个（本实验中的网络中只有两个）ResNeXtBlock之后分别加入了Dropout。并且通过多次的横向对比实验证明，倒数第二个dropout层和倒数第一个dropout层分别选择0.2和0.4的丢弃率相对更好：
+
+| dropout            | acc     |
+| ------------------ | ------- |
+| （0，0）(baseline) | 62.8%   |
+| （0.2，0.4）       | **65%** |
+| （0.3，0.5）       | 64.6%   |
+
+由此，网络架构中的一个stage结构如下：
+
+<img src="./assets/image-20240520191513186.png" alt="image-20240520191513186" style="zoom:67%;" />
+
+实现代码如下：
+
+```python
+def block(self, num_ResNeXt, num_channels, first_block=False):
+    blk = []
+    for i in range(num_ResNeXt):
+        if i == 0 and not first_block:
+            blk.append(ResNeXtBlock(num_channels, 32, 1, use_1x1conv=True, strides=2))
+        elif i==num_ResNeXt-2:
+            blk.append(ResNeXtBlock(num_channels, 32, 1))
+            blk.append(nn.Dropout(0.2))
+        elif i==num_ResNeXt-1:
+            blk.append(ResNeXtBlock(num_channels, 32, 1))
+            blk.append(nn.Dropout(0.4))
+    return nn.Sequential(*blk)
+```
+
+
+
+#### 模型整体架构
+
+模型的输入与输出部分的结构与ResNet18一致，都是首先经过一个7x7、步长为2、padding为3、输出通道为64的卷积层，然后经过批归一化和ReLU后再进行一次3x3步长为2padding为1的最大池化层后送入ResNeXt Stage进行处理。
+
+```python
+def b1(self):
+    return nn.Sequential(
+        nn.LazyConv2d(64, kernel_size=7, stride=2, padding=3),
+        nn.LazyBatchNorm2d(), nn.ReLU(),
+        nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
+```
+
+由于在输入卷积处理部分已经经过了一次最大池化，也就是送入第一个ResNeXt Stage之前已经通过步长为2的最大池化层，所以在第一个ResNeXt Stage中的第一个ResNeXt Block不需要使用1x1卷积。
+
+而在输出阶段，从若干个ResNeXt Stage中获取到最终的特征图像后，对其进行1x1的全局平均池化，得到`(batch_size, num_channels)`尺寸的张量，然后对展平成向量后送入线性层进行处理，并指定输出维度为5，也就是输出各个类别的分数。
+
+模型整体代码如下：(之前`b1`和`block`函数都为ResNeXt的成员函数，这里不再重复展示)
+
+```python
+class ResNeXt(Classifier):
+    def __init__(self, arch, lr=0.1, num_classes=10):
+        super(ResNeXt, self).__init__()
+        self.save_hyperparameters()
+        self.net = nn.Sequential(self.b1())
+        for i, b in enumerate(arch):
+            self.net.add_module(f'b{i + 2}', self.block(*b, first_block=(i == 0)))
+        self.net.add_module('last', nn.Sequential(
+            nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten(),
+            nn.LazyLinear(num_classes)))
+        self.net.apply(utils.init_cnn)
+```
+
+对于ResNeXt Stage的层数选择，我对ResNet-18进行参考，以ResNet-18的网络架构（四层ResNeXt Stage）为baseline，改变stage数目进行多次实验，实验结果显示因为数据集较小，对比实验可知使用三层简化的ResNeXt在此数据集中的表现效果要比原论文的四层的ResNeXt效果要更好，而增加到五层后由于参数量过多，模型过于庞大而导致过拟合，效果反而大幅下降。
+
+| ResNeXt Stage数量                                         | acc       |
+| --------------------------------------------------------- | --------- |
+| 三层` ((2, 64), (2, 128), (2, 256)) `                     | **67.8%** |
+| 四层(baseline) ` ((2, 64), (2, 128), (2, 256), (2, 512))` | 65%       |
+| 五层 `((2, 64), (2, 128), (2, 256), (2, 512),  (2, 512))` | 57.8%     |
+
+由于在当前数据集下三层的效果最好，所以最终模型选用了三层的ResNeXt Stage。由于代码的模块化设计，指定模型层数这里只需要修改传入的`arch`参数即可：
+
+```python
+class ResNeXt18(ResNeXt):
+    def __init__(self, lr, num_classes):
+        super().__init__(((2, 64), (2, 128), (2, 256)),
+                       lr, num_classes)
+```
+
+最终的模型整体架构示意图如下：
+
+<img src="./assets/image-20240520201236949.png" alt="image-20240520201236949" style="zoom:67%;" />
+
+
+
+
+
+
+
