@@ -1,6 +1,6 @@
 
 A = 1;                  %载波幅度
-fc = 3;                 %载波频率
+fc = 30;                 %载波频率
 Nsam = 120;              %每个码元的采样点数,即采样频率fs
 fs  =Nsam;
 L_Dseq = 7;             %码元数目,数值长度
@@ -16,6 +16,8 @@ s_NRZ = rectpulse(binSignal,Nsam);
 d_NRZ = s_NRZ*2-1;
 dp_NRZ = rectpulse(dpSignal,Nsam);
 
+
+% 添加噪声
 ask = ammod(s_NRZ,fc,fs);
 d_ask = amdemod(ask,fc,fs);
 freqdev = 2;
@@ -27,33 +29,20 @@ d_psk = pmdemod(psk,fc,fs,phasedev);
 phasedev = pi/2;
 dpsk = pmmod(dp_NRZ,fc,fs,phasedev);
 d_dpsk = pmdemod(dpsk,fc,fs,phasedev);
-
+rev_dpsk = intdump(d_dpsk,fs); 
+rev_dpsk = dpskdemod(rev_dpsk,2); 
+rev_dpsk = rectpulse(rev_dpsk,Nsam);
 
 
 figure(); 
-subplot(521);
-plot(t,s_NRZ,'LineWidth',2);title('极性波形'); 
-subplot(522);
-plot(t,dp_NRZ,'LineWidth',2);title("差分波形");
-subplot(523);
-plot(t,fsk,'LineWidth',2);title("FSK调制波形");
-subplot(525);
-plot(t,ask,'LineWidth',2);title("ASK调制波形");
-subplot(527);
-plot(t,psk,'LineWidth',2);title("PSK调制波形");
-subplot(529);
-plot(t,dpsk,'LineWidth',2);title("DPSK调制波形");
-subplot(524);
+subplot(411);
 plot(t,d_ask,'LineWidth',2);title("ASK解调波形");
-subplot(526);
+subplot(412);
 plot(t,d_fsk,'LineWidth',2);title("FSK解调波形");
-subplot(528);
+subplot(413);
 plot(t,d_psk,'LineWidth',2);title("PSK解调波形");
-subplot(5,2,10);
-plot(t,d_dpsk,'LineWidth',2);title("DPSK解调波形");
-
-
-
+subplot(414);
+plot(t,rev_dpsk,'LineWidth',2);title("DPSK解调波形");
 
 
 

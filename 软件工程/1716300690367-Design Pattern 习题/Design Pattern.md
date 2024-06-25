@@ -1,4 +1,4 @@
-# Funny JSON Explorer 设计文档
+# Funny JSON Explorer 设计文档-V2
 
 ### 介绍与使用说明
 
@@ -6,8 +6,9 @@ Funny JSON Explorer（**FJE**），是一个JSON文件可视化的命令行界�
 
 - 使用python编写完成，**支持所有复杂json格式文档**的可视化；
 - FJE可以快速切换**风格**（style），并且内置了包括树形（tree）和矩形（rectangle）在内的两种两种可视化风格的实现；
-- 也可以指定**图标族**（icon family），为中间节点或叶节点指定一套icon。工具自带超过五种图标族，同时使用者也可以更改配置文件修改或者添加个性化的图标族；
+- 也可以指定**图标族**（icon family），为中间节点或叶节点指定一套icon。工具自带超过五种图标族，同时使用者也**可以自行更改配置文件**修改或者添加个性化的图标族；
 - 程序采用了抽象工厂的设计模式，使用者可以在不改变原有代码的情况下添加新的风格。
+- **后续更改了第二版，增加了迭代器+访问者模式**
 
 #### 使用方法
 
@@ -65,17 +66,139 @@ python fje.py -f test.json -s rectangle -i tree
 └──┴──┴──┴──┴─🍂sections[2]: magazine────────────────────────┘
 ```
 
-同时可以修改配置文件添加新的图标族：
+同时可以通过修改代码中的配置文件添加新的图标族：
 
-![image-20240612235906716](./assets/image-20240612235906716.png)
+```python
+    icon_family = {
+        'default': [' ', ' '],
+        'tree': ['🌳', '🍂'],
+        'star': ['⭐️', '✨'],
+        'animal': ['🐿️', '🐾'],
+        'tech': ['💻', '📱'],
+        'food': ['🍎', '🍏'],
+    }[args.icon]
+```
+
+例如增加`happy`图标族：
+
+```python
+    icon_family = {
+        'default': [' ', ' '],
+        'tree': ['🌳', '🍂'],
+        'star': ['⭐️', '✨'],
+        'animal': ['🐿️', '🐾'],
+        'tech': ['💻', '📱'],
+        'food': ['🍎', '🍏'],
+        'happy': ['👌', '😄'],
+    }[args.icon]
+```
+
+指定风格为`gesture`：
+
+```shell
+python fje.py -f test.json -s rectangle -i gesture
+```
+
+输出如下：
+
+```
+├─😄name: root
+└─👌children
+   └─👌children[0]
+      ├─😄name: child1
+      ├─😄value: leaf1
+      └─👌children[1]
+         ├─😄name: child2
+         └─👌children
+            └─👌children[0]
+               ├─😄name: subchild1
+               ├─😄value: leaf2
+               └─👌children[1]
+                  ├─😄name: subchild2
+                  └─😄value: leaf3
+```
+
+**第二版更新：**
+
+增加了访问者模式，**增加了迭代器+访问者模式**，代码中引入了Visitor接口。
+
+指令增加了参数`--visit, -v`，可以在命令行中执行访问者操作。为了演示起见，这里只实现了访问模式中访问节点树结构的操作。后续使用者可以根据需求自行增加访问者操作。
+
+```shell
+python fje.py -f test.json -s tree -i animal -v
+```
+
+<img src="./assets/image-20240619232813353.png" alt="image-20240619232813353" style="zoom:67%;" />
 
 ### 设计模式
+
+第二版设计模式，**增加了迭代器+访问者模式**，对代码进行了重构，类图也有所变化和更新。
+
+#### 类图
+
+更新后类图如下：
+
+![image-20240619233934606](./assets/image-20240619233934606.png)
+
+第二版新增了两个模块：
+
+##### 迭代器模式：
+
+**迭代器模式**是一种行为设计模式，它提供了一种方法顺序访问一个聚合对象中的各个元素，而又不需要暴露该对象的内部表示。迭代器模式将遍历聚合对象的行为封装到迭代器对象中，从而使得遍历行为和聚合对象的实现分离开。
+
+第二版中迭代器模式体现在 `JSONIterator` 类，用于迭代地遍历 JSON 数据结构，用于遍历复杂的 JSON 数据结构，并将其逐步展开，以便构建相应的节点结构。
+
+```python
+class JSONIterator:
+    """
+    JSON迭代器
+    """
+
+    def __init__(self, json_data):
+        self.stack = [(None, json_data)]
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if not self.stack:
+            raise StopIteration
+
+        key, value = self.stack.pop()
+        if isinstance(value, dict):
+            for k, v in reversed(list(value.items())):
+                self.stack.append((k, v))
+            return key, value, 'dict'
+        elif isinstance(value, list):
+            for i, v in reversed(list(enumerate(value))):
+                self.stack.append((f"{key}[{i}]", v))
+            return key, value, 'list'
+        else:
+            return key, value, 'leaf'
+```
+
+
+
+##### 访问者模式
+
+访问者模式是一种行为设计模式，允许在不改变对象结构的情况下添加新的操作。它将操作的逻辑从对象结构中分离出来，使得使用者可以在对象结构不变的情况下添加新的操作。
+
+在第二版中，访问者模式用于处理树形节点（包括叶子节点和复合节点）：
+
+- **Visitor（访问者）接口**：定义了访问不同类型节点的方法。这里包括 `visit_leaf_node` 和 `visit_composite_node` 方法。
+- **具体访问者类（PrintVisitor）**：实现 `Visitor` 接口中的方法。它定义了访问具体节点时要执行的操作。PrintVisitor` 类定义了如何访问和打印叶子节点和复合节点。
+- **Node（节点）接口**：定义了节点的基本行为，包括接受访问者的 `accept` 方法和显示节点的 `display` 方法。
+- **具体节点类（TreeLeafNode 和 TreeCompositeNode）**：实现 `Node` 接口。每个节点类都实现了 `accept` 方法，用于接受访问者并调用访问者的相应方法。
+
+-------
+
+### 设计模式（第一版）
 
 #### 类图
 
 程序类图如下：
 
-![image-20240612234612944](./assets/image-20240612234612944.png)
+![image-20240619231109133](./assets/image-20240619231109133.png)
 
 #### 设计模式说明
 
@@ -92,7 +215,7 @@ python fje.py -f test.json -s rectangle -i tree
 - **抽象工厂类 `NodeFactory`**：定义了两个方法 `create_leaf_node` 和 `create_composite_node`，用于创建叶子节点和复合节点。
 - **具体工厂类 `TreeNodeFactory` 和 `RectangleNodeFactory`**：分别实现了创建树形结构节点和矩形结构节点的方法。
 
-<img src="./assets/image-20240612234154535.png" alt="image-20240612234154535"  />
+![image-20240619231118997](./assets/image-20240619231118997.png)
 
 
 
@@ -104,7 +227,7 @@ python fje.py -f test.json -s rectangle -i tree
 - **具体类 `TreeLeafNode` 和 `TreeCompositeNode`**：实现了树形结构的叶子节点和复合节点。
 - **具体类 `RectangleLeafNode` 和 `RectangleCompositeNode`**：实现了矩形结构的叶子节点和复合节点。
 
-![image-20240612234409409](./assets/image-20240612234409409.png)
+![image-20240619231132515](./assets/image-20240619231132515.png)
 
 
 
@@ -114,7 +237,7 @@ python fje.py -f test.json -s rectangle -i tree
 
 - **类 `JSONBuilder`**：接收一个节点工厂和图标族，通过解析 JSON 数据来构建节点树。
 
-  ![image-20240612234553912](./assets/image-20240612234553912.png)
+  ![image-20240619231142487](./assets/image-20240619231142487.png)
 
 
 
