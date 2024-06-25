@@ -1,0 +1,56 @@
+{
+  "library": {
+    "books": [
+      {
+        "title": "Effective Java",
+        "author": "Joshua Bloch",
+        "editions": [
+          {
+            "edition": 1,
+            "year": 2001
+          },
+          {
+            "edition": 2,
+            "year": 2008
+          },
+          {
+            "edition": 3,
+            "year": 2018
+          }
+        ]
+      },
+      {
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "editions": [
+          {
+            "edition": 1,
+            "year": 2008
+          }
+        ]
+      }
+    ],
+    "magazines": [
+      {
+        "title": "The Pragmatic Programmer",
+        "issue": "20th Anniversary Edition",
+        "year": 2019
+      },
+      {
+        "title": "Code Complete",
+        "issue": "2nd Edition",
+        "year": 2004
+      }
+    ],
+    "newspapers": {
+      "daily": {
+        "name": "The Times",
+        "sections": ["news", "sports", "entertainment"]
+      },
+      "weekly": {
+        "name": "The Sunday Times",
+        "sections": ["news", "lifestyle", "magazine"]
+      }
+    }
+  }
+}
