@@ -1,0 +1,10 @@
+target/
+captures/
+dumps/
+.vscode/
+.idea/
+/*.json
+**/*.png
+**tmp**
+**/.DS_Store
+data/
